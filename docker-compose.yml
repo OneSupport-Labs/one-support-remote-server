@@ -1,0 +1,20 @@
+services:
+  hbbs:
+    container_name: hbbs
+    image: custom-rustdesk-server  # 이미지 이름을 통일
+    command: hbbs
+    volumes:
+      - ./data:/root
+    network_mode: "host"
+    depends_on:
+      - hbbr
+    restart: unless-stopped
+  hbbr:
+    container_name: hbbr
+    image: custom-rustdesk-server  # 이미지 이름을 통일
+    build: .
+    command: hbbr
+    volumes:
+      - ./data:/root
+    network_mode: "host"
+    restart: unless-stopped
